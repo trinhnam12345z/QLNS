@@ -1,6 +1,7 @@
 package com.trinhnam12345z.qlns;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -56,6 +57,15 @@ public class AdapterNhanVien extends BaseAdapter {
         txtSDT.setText(nhanVien.SoDT);
         Bitmap bmAnh = BitmapFactory.decodeByteArray(nhanVien.Anh,0, nhanVien.Anh.length);
         imgAnh.setImageBitmap(bmAnh);
+
+        btnSua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, Update.class);
+                intent.putExtra("MaNV",nhanVien.MaNV);
+                context.startActivity(intent);
+            }
+        });
 
         return dong;
     }
