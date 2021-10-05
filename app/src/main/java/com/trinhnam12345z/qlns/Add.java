@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,12 +21,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class Update extends AppCompatActivity {
-
+public class Add extends AppCompatActivity {
     Button btnChupHinh,btnChonHinh,btnLuu,btnQuaylai;
-    EditText editTenNV,editSDT;
+    EditText editTenNV,editSDT,editManv;
     ImageView imgAnh;
-    int manv;
 
     final String DATABASE_NAME = "QLNS.db";
     final int REQUEST_TAKE_PHOTO = 123;
@@ -36,13 +33,16 @@ public class Update extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update);
+        setContentView(R.layout.activity_add);
 
-        addControl();
-
-        Intent intent = getIntent();
-        manv = intent.getIntExtra("MaNV",-1);
-        loadData(manv);
+        btnChupHinh = (Button) findViewById(R.id.btnChupAnhh);
+        btnChonHinh = (Button) findViewById(R.id.btnChonAnhh);
+        btnLuu = (Button) findViewById(R.id.btnLuuu);
+        btnQuaylai = (Button) findViewById(R.id.btnQuayLaii);
+        editTenNV = (EditText) findViewById(R.id.editTenNVv);
+        editSDT = (EditText) findViewById(R.id.editSDTt);
+        imgAnh = (ImageView) findViewById(R.id.imgAnhhh);
+        editManv = (EditText) findViewById(R.id.editMaNv);
 
         addEvent();
     }
@@ -63,7 +63,7 @@ public class Update extends AppCompatActivity {
         btnQuaylai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Update.this, MainActivity.class);
+                Intent intent = new Intent(Add.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -73,20 +73,23 @@ public class Update extends AppCompatActivity {
                 String tenNV = editTenNV.getText().toString();
                 String sdt = editSDT.getText().toString();
                 byte[] anh = getByteArrayFromImageView(imgAnh);
+                int manv = Integer.parseInt(editManv.getText().toString());
 
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("TenNv",tenNV);
                 contentValues.put("SDT",sdt);
                 contentValues.put("Anh",anh);
+                contentValues.put("MaNv",manv);
 
-                SQLiteDatabase database = Database.initDatabase(Update.this,DATABASE_NAME);
-                database.update("NhanVien",contentValues,"MaNv = ?",new String[]{manv +""});
+                SQLiteDatabase database = Database.initDatabase(Add.this,DATABASE_NAME);
+                database.insert("NhanVien",null,contentValues);
 
-                Intent intent = new Intent(Update.this,MainActivity.class);
+                Intent intent = new Intent(Add.this,MainActivity.class);
                 startActivity(intent);
             }
         });
-    }    private void takePhoto(){
+    }
+    private void takePhoto(){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent , REQUEST_TAKE_PHOTO);
     }
@@ -96,18 +99,6 @@ public class Update extends AppCompatActivity {
         intent.setType("image/");
         startActivityForResult(intent , REQUEST_CHOOSE_PHOTO);
     }
-    // chuyen anh ve dang byte
-    public byte[] getByteArrayFromImageView(ImageView imgv){
-        BitmapDrawable drawable = (BitmapDrawable) imgv.getDrawable();
-        Bitmap bmp = drawable.getBitmap();
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-        return byteArray;
-    }
-
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -127,27 +118,12 @@ public class Update extends AppCompatActivity {
             }
         }
     }
-
-    private void loadData(int manv) {
-        SQLiteDatabase database = Database.initDatabase(this,DATABASE_NAME);
-        Cursor cursor = database.rawQuery("select * from NhanVien where MaNv = ?",new String[]{manv +""});
-        cursor.moveToFirst();
-        String tennv = cursor.getString(1);
-        String sdt = cursor.getString(2);
-        byte[] anh = cursor.getBlob(3);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(anh,0,anh.length);
-        imgAnh.setImageBitmap(bitmap);
-        editTenNV.setText(tennv);
-        editSDT.setText(sdt);
-    }
-
-    private void addControl() {
-        btnChupHinh = (Button) findViewById(R.id.btnChupAnh);
-        btnChonHinh = (Button) findViewById(R.id.btnChonAnh);
-        btnLuu = (Button) findViewById(R.id.btnLuu);
-        btnQuaylai = (Button) findViewById(R.id.btnQuayLai);
-        editTenNV = (EditText) findViewById(R.id.editTenNV);
-        editSDT = (EditText) findViewById(R.id.editSDT);
-        imgAnh = (ImageView) findViewById(R.id.imgAnhh);
+    public byte[] getByteArrayFromImageView(ImageView imgv){
+        BitmapDrawable drawable = (BitmapDrawable) imgv.getDrawable();
+        Bitmap bmp = drawable.getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
     }
 }

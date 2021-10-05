@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Add"
+    tools:layout_editor_absoluteX="3dp"
+    tools:layout_editor_absoluteY="80dp">
+
+    <ImageView
+        android:id="@+id/imgAnhhh"
+        android:layout_width="140dp"
+        android:layout_height="142dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/btnChupAnhh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="40dp"
+        android:text="Chụp ảnh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.904"
+        app:layout_constraintStart_toEndOf="@+id/imgAnhhh"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnChonAnhh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="40dp"
+        android:text="Chọn ảnh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.883"
+        app:layout_constraintStart_toEndOf="@+id/imgAnhhh"
+        app:layout_constraintTop_toBottomOf="@+id/btnChupAnhh" />
+
+    <EditText
+        android:id="@+id/editTenNVv"
+        android:layout_width="315dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="52dp"
+        android:ems="10"
+        android:hint="Tên"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editMaNv" />
+
+    <EditText
+        android:id="@+id/editSDTt"
+        android:layout_width="315dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="52dp"
+        android:ems="10"
+        android:hint="SĐT"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTenNVv" />
+
+    <Button
+        android:id="@+id/btnQuayLaii"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="88dp"
+        android:text="Quay lại"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editSDTt" />
+
+    <Button
+        android:id="@+id/btnLuuu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:text="Lưu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.739"
+        app:layout_constraintStart_toEndOf="@+id/btnQuayLaii"
+        app:layout_constraintTop_toBottomOf="@+id/editSDTt" />
+
+    <EditText
+        android:id="@+id/editMaNv"
+        android:layout_width="315dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="48dp"
+        android:ems="10"
+        android:hint="Mã NV"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgAnhhh" />
+</androidx.constraintlayout.widget.ConstraintLayout>

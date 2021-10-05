@@ -2,9 +2,13 @@ package com.trinhnam12345z.qlns;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -13,7 +17,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     final String DATABASE_NAME = "QLNS.db";
     SQLiteDatabase database;
-
     ListView listDSNV;
     ArrayList<NhanVien> arrNhanVien;
     AdapterNhanVien adapterNhanVien;
@@ -26,7 +29,20 @@ public class MainActivity extends AppCompatActivity {
         addControl();
         readData();
 
+
+        Button btnThem = (Button) findViewById(R.id.btnThem);
+
+        btnThem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Add.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
+
 
     private void readData() {
         //goi database
